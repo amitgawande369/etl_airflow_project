@@ -40,21 +40,21 @@ etl-airflow-pipeline/
 │  
 ├── dags/  
 │ └── etl_pipeline_dag.py  
-│
-├── data/
-│ ├── raw/
-│ │ ├── sample.csv
-│ │ └── sample.json
-│ └── processed/
-│
-├── scripts/
-│ ├── extract.py
-│ ├── transform.py
-│ └── load.py
-│
-├── database/
-│ └── etl.db
-│
-├── requirements.txt
-├── docker-compose.yml
-└── README.md
+│  
+├── data/  
+│ ├── raw/  
+│ │ ├── sample.csv  
+│ │ └── sample.json  
+│ └── processed/  
+│  
+├── scripts/  
+│ ├── extract.py  
+│ ├── transform.py  
+│ └── load.py  
+│  
+├── database/  
+│ └── etl.db  
+│  
+├── requirements.txt  
+├── docker-compose.yml  
+└── README.md  
