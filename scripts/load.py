@@ -1,10 +1,13 @@
 import pandas as pd
 from sqlalchemy import create_engine
 
-def load_weather():
-    engine = create_engine(
-        "postgresql://airflow:airflow@localhost:5432/weather_db"
-    )
+DB_PATH = "database/etl.db"
 
-    df = pd.read_csv("/tmp/weather_transformed.csv")
-    df.to_sql("weather_data", engine, if_exists="replace", index=False)
+def load_data():
+    engine = create_engine(f"sqlite:///{DB_PATH}")
+
+    df = pd.read_csv("data/processed/final_data.csv")
+
+    df.to_sql("etl_data", engine, if_exists="replace", index=False)
+
+    print("✅ Data loaded into SQLite database")
