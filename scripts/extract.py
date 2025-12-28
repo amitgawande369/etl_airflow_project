@@ -1,21 +1,25 @@
-import requests
 import pandas as pd
+import requests
+import os
 
-def extract_weather():
-    url = "https://api.open-meteo.com/v1/forecast"
-    params = {
-        "latitude": 18.52,
-        "longitude": 73.85,
-        "hourly": "temperature_2m",
-    }
+RAW_DATA_PATH = "data/raw"
 
-    response = requests.get(url, params=params)
-    response.raise_for_status()
-    data = response.json()
+def extract_data():
+    os.makedirs(RAW_DATA_PATH, exist_ok=True)
 
-    df = pd.DataFrame({
-        "timestamp": data["hourly"]["time"],
-        "temperature": data["hourly"]["temperature_2m"]
-    })
+    # Extract CSV
+    csv_df = pd.read_csv(f"{RAW_DATA_PATH}/sample.csv")
 
-    df.to_csv("/tmp/weather_raw.csv", index=False)
+    # Extract JSON
+    json_df = pd.read_json(f"{RAW_DATA_PATH}/sample.json")
+
+    # Extract API data
+    response = requests.get("https://jsonplaceholder.typicode.com/users")
+    api_df = pd.DataFrame(response.json())
+
+    # Save extracted data
+    csv_df.to_csv(f"{RAW_DATA_PATH}/csv_data.csv", index=False)
+    json_df.to_csv(f"{RAW_DATA_PATH}/json_data.csv", index=False)
+    api_df.to_csv(f"{RAW_DATA_PATH}/api_data.csv", index=False)
+
+    print("✅ Data extraction completed")
